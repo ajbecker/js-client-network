@@ -1,0 +1,13 @@
+{
+    "name": "js-client-network"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies": {
+      "express": ">= 2.4.7"
+    , "jade": ">= 0.0.1"
+    , "node-inspector": ">= 0.0.1"
+    , "socket.io": ">= 0.0.1"
+    , "underscore": ">= 0.0.1"
+    , "cluster": ">= 0.0.1"
+  }
+}
