@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Layout Example</title>
+        <script type="text/javascript" src="socket.io/socket.io.js.js"></script>
+        <script type="text/javascript" src="javascripts/jquery.js"></script>
+        <script type="text/javascript" src="javascripts/jquery.layout.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+	        var layout = $('body').layout({ applyDefaultStyles: true });
+		
+			var socket = io.connect("http://clear.digisecinc.com:8081/"),	
+				center = $(".ui-layout-center"),
+				head = $("#head");
+			socket.on("msg", function (msg) {
+				head.text(JSON.stringify(msg.meta, null, 2));
+				center.append($("<div>").text(msg.data));
+				layout.resizeAll();
+			});
+			
+			$("#btn").click(function () {
+				socket.emit("msg", $("#msg").val());
+			});
+        });
+        </script>
+        <link rel="stylesheet" type="text/css" href="stylesheets/layout-default.css" />
+    </head>
+    <body>
+        <div class="ui-layout-center">
+			<pre id="head"></pre>
+			<h2>Messages</h2>
+			<input type="text" id="msg" /><button id="btn">Send</button>
+        </div>
+        <!--<div class="ui-layout-north"></div>-->
+        <!--<div class="ui-layout-south">South</div>
+        <div class="ui-layout-east">East</div>
+        <div class="ui-layout-west">West</div>-->
+    </body>
+</html>
